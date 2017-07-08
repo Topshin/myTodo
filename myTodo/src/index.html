@@ -10,6 +10,61 @@
   <script src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js></script>
 </head>
 <body>
-  <app-root></app-root>
+<app-root>Loading...</app-root>
 </body>
 </html>
+
+<script>
+  var todo_list = []; // 리스트 업 array
+
+  function add_todo() {
+    // 변수 업데이트
+    var todo = {
+      isFinished: false,
+      toDo: $('#input_todo').val(), // 인풋값 잡아서 리턴
+      created: new Date(), // 새로운 생성
+      updated: new Date() // 업데이트
+    };
+    todo_list.push(todo); // 새 값 아래로 정렬
+
+    //뷰 갱신
+    refresh();
+  }
+
+  function refresh() {
+    //todo_list 모두 삭제
+    $('#todo_list').empty();
+    //DOM에서 조건에 일치하는 요소들의 자식 노드들을 제거함
+    todo_list.forEach(function (item, index) {
+      var todo = '    <tr>'
+        + '<td>'
+        + '<input type="checkbox" ' + (item.isFinished ? 'checked' : '')//?<-이해안감
+        + ' onchange="update(' + index + ')"' + '>'
+        + '</td>'
+        + (item.isFinished ? '<td style="text-decoration: line-through">' : '<td>')
+        + item.toDo
+        + '</td>'
+        + '<td>' + item.created + '</td>'
+        + '<td>' + item.updated + '</td>'
+        + '<td>'
+        + '<button type="button" class="btn btn-danger" onclick="remove(' + index + ')">삭제</button>'
+        + '</td>'
+        + '</tr>'
+      ;
+      $('#todo_list').append(todo);//추가함
+    });
+  }
+  function update(index) {
+    // 값 변경
+    var todo = todo_list[index];
+    todo.isFinished = !todo.isFinished;
+    todo.updated = new Date();
+    //뷰 갱신
+    refresh();
+  }
+  function remove(index) {
+    todo_list.splice(index, 1); // 제거, 1은 왜 있지?
+    refresh();
+  }
+
+</script>

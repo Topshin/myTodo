@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>나는야 jQuery</h1>
+<div class="container-fluid" style="padding: 1% 15% 0 15%">
+  <h2>My To Do's</h2><br><br>
+  <div class="row">
+    <div class="col-xs-8">
+      <input type="text" class="form-control" placeholder="할일" id="input_todo">
+    </div>
+    <div class="col-xs-4">
+      <button type="button" class="form-control" onclick="add_todo()">추가</button>
+    </div>
+  </div>
+  <br>
 
-</body>
-</html>
+  <table class="table table-striped">
+    <thead>
+      <th>완료</th>
+      <th>To Do</th>
+      <th>생성일</th>
+      <th>수정일</th>
+      <th>삭제</th>
+    </thead>
+    <tbody id="todo_list">
+
+    </tbody>
+  </table>
+</div>
